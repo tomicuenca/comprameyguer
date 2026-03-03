@@ -1,6 +1,7 @@
 package com.tomicuenca.comprameyguer.controller;
 
 import com.tomicuenca.comprameyguer.dto.KeyboardDTO;
+import com.tomicuenca.comprameyguer.service.PeripheralService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/peripheral")
 public class PeripheralController {
 
+    private static PeripheralService peripheralService;
+
     @GetMapping("/test")
     public String test(){
         return "Test";
@@ -16,14 +19,6 @@ public class PeripheralController {
 
     @GetMapping("/testKeyboard")
     public KeyboardDTO testKeyboard(){
-        return KeyboardDTO.builder()
-                .model("Asus COOL Keyboard")
-                .imported(true)
-                .price("150 USD")
-                .weight(0.6)
-                .stock(10)
-                .keys(55)
-                .mechanical(true)
-                .build();
+        return peripheralService.getTestKeyboard();
     }
 }

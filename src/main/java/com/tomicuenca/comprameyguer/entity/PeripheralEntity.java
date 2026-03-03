@@ -1,9 +1,11 @@
 package com.tomicuenca.comprameyguer.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Data
+@NoArgsConstructor
 @SuperBuilder
 public abstract class PeripheralEntity {
     private Integer id;
