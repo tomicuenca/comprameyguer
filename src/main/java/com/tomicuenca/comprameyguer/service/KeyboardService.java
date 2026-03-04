@@ -19,14 +19,14 @@ public class KeyboardService {
     private final KeyboardRepository keyboardRepository;
 
 
-    public KeyboardDTO getTestKeyboard(){
+    public KeyboardDTO getKeyboard(Long id){
         try {
-            Optional<KeyboardEntity> opt = keyboardRepository.findById(2L);
+            Optional<KeyboardEntity> opt = keyboardRepository.findById(id);
             if(opt.get() != null){
                 return KeyboardMapper.entityToDTO(opt.get());
             }
         }catch (Exception e){
-            log.error("An error ocurred trying to retrieve the test keyboard: " + e);
+            log.error("An error ocurred trying to retrieve the keyboard: " + e);
         }
         return null;
     }
