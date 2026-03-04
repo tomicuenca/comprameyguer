@@ -7,6 +7,8 @@ import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/keyboard")
 @RequiredArgsConstructor
@@ -17,6 +19,11 @@ public class KeyboardController {
     @GetMapping()
     public KeyboardDTO getKeyboard(@RequestParam Long id){
         return keyboardService.getKeyboard(id);
+    }
+
+    @GetMapping("/all")
+    public List<String> getAllKeyboardModels(){
+        return keyboardService.getAllKeyboardModels();
     }
 
     @PostMapping("/save")
