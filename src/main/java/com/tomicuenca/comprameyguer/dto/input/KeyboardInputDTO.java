@@ -1,5 +1,6 @@
-package com.tomicuenca.comprameyguer.dto;
+package com.tomicuenca.comprameyguer.dto.input;
 
+import com.tomicuenca.comprameyguer.dto.PeripheralDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -9,7 +10,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @SuperBuilder
-public class KeyboardDTO extends PeripheralDTO {
+public class KeyboardInputDTO extends PeripheralInputDTO {
     private Integer keys;
     private Boolean mechanical;
 }

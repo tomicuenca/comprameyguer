@@ -1,6 +1,7 @@
 package com.tomicuenca.comprameyguer.service;
 
 import com.tomicuenca.comprameyguer.dto.KeyboardDTO;
+import com.tomicuenca.comprameyguer.dto.input.KeyboardInputDTO;
 import com.tomicuenca.comprameyguer.entity.KeyboardEntity;
 import com.tomicuenca.comprameyguer.mapper.KeyboardMapper;
 import com.tomicuenca.comprameyguer.repository.KeyboardRepository;
@@ -28,5 +29,16 @@ public class KeyboardService {
             log.error("An error ocurred trying to retrieve the test keyboard: " + e);
         }
         return null;
+    }
+
+    public String saveKeyboard(KeyboardInputDTO input){
+        try{
+            KeyboardEntity entity = KeyboardMapper.inputDTOToEntity(input);
+            keyboardRepository.save(entity);
+            return "Keyboard saved successfully";
+        }catch (Exception e){
+            log.error("An error ocurred saving the keyboard: " + e);
+            return "An error ocurred saving the keyboard";
+        }
     }
 }
