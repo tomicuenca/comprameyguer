@@ -30,4 +30,11 @@ public class KeyboardController {
     public String saveKeyboard(@RequestBody KeyboardInputDTO input){
         return keyboardService.saveKeyboard(input);
     }
+
+    @PatchMapping("/sell")
+    public String sellKeyboard(@RequestParam Long id){
+        return keyboardService.sellKeyboard(id);
+    }
+
+
 }

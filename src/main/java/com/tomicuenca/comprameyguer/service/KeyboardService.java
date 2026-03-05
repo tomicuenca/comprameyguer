@@ -38,8 +38,8 @@ public class KeyboardService {
             List<KeyboardEntity> keyboardList = keyboardRepository.findAll();
             return keyboardList.stream().map(PeripheralEntity::getModel).toList();
         }catch (Exception e){
-            log.error("An error ocurred retrieving the keyboards: " + e);
-            return List.of("An error ocurred retrieving the keyboards");
+            log.error("An error ocurred trying to retrieve the keyboards: " + e);
+            return List.of("An error ocurred trying to retrieve the keyboards");
         }
     }
 
@@ -49,9 +49,29 @@ public class KeyboardService {
             keyboardRepository.save(entity);
             return "Keyboard saved successfully";
         }catch (Exception e){
-            log.error("An error ocurred saving the keyboard: " + e);
-            return "An error ocurred saving the keyboard";
+            log.error("An error ocurred trying to save the keyboard: " + e);
+            return "An error ocurred trying to save the keyboard";
         }
+    }
+
+    public String sellKeyboard(Long id){
+        try {
+            Optional<KeyboardEntity> opt = keyboardRepository.findById(id);
+            if(opt.get() != null){
+                KeyboardEntity entity = opt.get();
+                if(entity.getStock() > 0) {
+                    entity.setStock(entity.getStock() - 1);
+                    keyboardRepository.save(entity);
+                    return String.format("Keyboard sold successfully. New stock: %s", entity.getStock());
+                }
+                else{
+                    return "This keyboard is out of stock";
+                }
+            }
+        }catch (Exception e){
+            log.error("An error ocurred trying to sell the keyboard: " + e);
+        }
+        return "An error ocurred trying to sell the keyboard";
     }
 
 }
