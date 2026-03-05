@@ -1,4 +1,4 @@
-package com.tomicuenca.comprameyguer.dto;
+package com.tomicuenca.comprameyguer.dto.output;
 
 import com.tomicuenca.comprameyguer.enums.PanelEnum;
 import lombok.Data;
@@ -10,7 +10,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @SuperBuilder
-public class MonitorDTO extends PeripheralDTO {
+public class MonitorOutputDTO extends PeripheralOutputDTO {
     private Float inches;
     private PanelEnum panel;
 }

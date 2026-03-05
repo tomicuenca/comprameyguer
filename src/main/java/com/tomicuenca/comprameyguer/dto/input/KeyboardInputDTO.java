@@ -1,6 +1,5 @@
 package com.tomicuenca.comprameyguer.dto.input;
 
-import com.tomicuenca.comprameyguer.dto.PeripheralDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

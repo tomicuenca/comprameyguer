@@ -1,6 +1,6 @@
 package com.tomicuenca.comprameyguer.mapper;
 
-import com.tomicuenca.comprameyguer.dto.KeyboardDTO;
+import com.tomicuenca.comprameyguer.dto.output.KeyboardOutputDTO;
 import com.tomicuenca.comprameyguer.dto.input.KeyboardInputDTO;
 import com.tomicuenca.comprameyguer.entity.KeyboardEntity;
 import com.tomicuenca.comprameyguer.enums.CurrencyEnum;
@@ -8,7 +8,7 @@ import com.tomicuenca.comprameyguer.enums.CurrencyEnum;
 public class KeyboardMapper {
 
 
-    public static KeyboardDTO entityToDTO(KeyboardEntity entity){
+    public static KeyboardOutputDTO entityToOutputDTO(KeyboardEntity entity){
 
         CurrencyEnum currency;
         if(!entity.getImported()){
@@ -18,7 +18,7 @@ public class KeyboardMapper {
             currency = CurrencyEnum.USD;
         }
 
-        return KeyboardDTO.builder()
+        return KeyboardOutputDTO.builder()
                 .model(entity.getModel())
                 .imported(entity.getImported())
                 .price(entity.getPrice())

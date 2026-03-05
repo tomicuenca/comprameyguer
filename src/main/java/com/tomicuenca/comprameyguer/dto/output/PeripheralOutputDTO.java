@@ -1,4 +1,4 @@
-package com.tomicuenca.comprameyguer.dto;
+package com.tomicuenca.comprameyguer.dto.output;
 
 import com.tomicuenca.comprameyguer.enums.CurrencyEnum;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public abstract class PeripheralDTO {
+public abstract class PeripheralOutputDTO {
     private String model;
     private Boolean imported;
     private Float price;

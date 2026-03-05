@@ -1,9 +1,8 @@
 package com.tomicuenca.comprameyguer.controller;
 
-import com.tomicuenca.comprameyguer.dto.KeyboardDTO;
+import com.tomicuenca.comprameyguer.dto.output.KeyboardOutputDTO;
 import com.tomicuenca.comprameyguer.dto.input.KeyboardInputDTO;
 import com.tomicuenca.comprameyguer.service.KeyboardService;
-import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,23 +16,23 @@ public class KeyboardController {
     private final KeyboardService keyboardService;
 
     @GetMapping()
-    public KeyboardDTO getKeyboard(@RequestParam Long id){
-        return keyboardService.getKeyboard(id);
+    public KeyboardOutputDTO getKeyboard(@RequestParam Long id){
+        return keyboardService.getItem(id);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/models")
     public List<String> getAllKeyboardModels(){
-        return keyboardService.getAllKeyboardModels();
+        return keyboardService.getAllItemModels();
     }
 
-    @PostMapping("/save")
+    @PostMapping()
     public String saveKeyboard(@RequestBody KeyboardInputDTO input){
-        return keyboardService.saveKeyboard(input);
+        return keyboardService.saveItem(input);
     }
 
     @PatchMapping("/sell")
     public String sellKeyboard(@RequestParam Long id){
-        return keyboardService.sellKeyboard(id);
+        return keyboardService.sellItem(id);
     }
 
 
