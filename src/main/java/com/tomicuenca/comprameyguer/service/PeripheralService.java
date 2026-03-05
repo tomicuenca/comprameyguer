@@ -5,6 +5,7 @@ import com.tomicuenca.comprameyguer.dto.output.PeripheralOutputDTO;
 import com.tomicuenca.comprameyguer.dto.input.PeripheralInputDTO;
 import com.tomicuenca.comprameyguer.entity.KeyboardEntity;
 import com.tomicuenca.comprameyguer.entity.PeripheralEntity;
+import com.tomicuenca.comprameyguer.enums.CurrencyEnum;
 import com.tomicuenca.comprameyguer.mapper.KeyboardMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.repository.CrudRepository;
@@ -30,6 +31,22 @@ public abstract class PeripheralService<T extends PeripheralEntity, R extends Pe
             return repository.findById(id)
                     .map(this::entityToOutputDTO)
                     .orElse(null);
+        }catch (Exception e){
+            log.error("An error ocurred trying to retrieve the item: " + e);
+        }
+        return null;
+    }
+
+    public E getItemInLocalCurrency(Long id){
+        try {
+            E entity = repository.findById(id)
+                    .map(this::entityToOutputDTO)
+                    .orElse(null);
+            if(entity != null && entity.getImported()) {
+                entity.setCurrency(CurrencyEnum.ARS);
+                entity.setPrice(entity.getPrice() * 350);
+            }
+            return entity;
         }catch (Exception e){
             log.error("An error ocurred trying to retrieve the item: " + e);
         }

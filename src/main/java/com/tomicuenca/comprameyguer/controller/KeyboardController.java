@@ -20,6 +20,11 @@ public class KeyboardController {
         return keyboardService.getItem(id);
     }
 
+    @GetMapping("/localCurrency")
+    public KeyboardOutputDTO getKeyboardInLocalCurrency(@RequestParam Long id){
+        return keyboardService.getItemInLocalCurrency(id);
+    }
+
     @GetMapping("/models")
     public List<String> getAllKeyboardModels(){
         return keyboardService.getAllItemModels();
