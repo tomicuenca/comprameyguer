@@ -13,7 +13,7 @@ import lombok.experimental.SuperBuilder;
 public abstract class PeripheralOutputDTO {
     private String model;
     private Boolean imported;
-    private Float price;
+    private Double price;
     private CurrencyEnum currency;
     private Double weight;
     private Integer stock;

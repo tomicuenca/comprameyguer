@@ -5,6 +5,7 @@ import com.tomicuenca.comprameyguer.dto.output.KeyboardOutputDTO;
 import com.tomicuenca.comprameyguer.entity.KeyboardEntity;
 import com.tomicuenca.comprameyguer.mapper.KeyboardMapper;
 import com.tomicuenca.comprameyguer.repository.KeyboardRepository;
+import com.tomicuenca.comprameyguer.service.external.ConversionRateService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +13,8 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class KeyboardService extends PeripheralService<KeyboardEntity, KeyboardInputDTO, KeyboardOutputDTO>{
 
-    public KeyboardService(KeyboardRepository repository){
-        super(repository);
+    public KeyboardService(KeyboardRepository repository, ConversionRateService conversionRateService){
+        super(repository, conversionRateService);
     }
 
     @Override

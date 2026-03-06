@@ -1,12 +1,10 @@
 package com.tomicuenca.comprameyguer.service;
 
-import com.tomicuenca.comprameyguer.dto.input.KeyboardInputDTO;
 import com.tomicuenca.comprameyguer.dto.output.PeripheralOutputDTO;
 import com.tomicuenca.comprameyguer.dto.input.PeripheralInputDTO;
-import com.tomicuenca.comprameyguer.entity.KeyboardEntity;
 import com.tomicuenca.comprameyguer.entity.PeripheralEntity;
 import com.tomicuenca.comprameyguer.enums.CurrencyEnum;
-import com.tomicuenca.comprameyguer.mapper.KeyboardMapper;
+import com.tomicuenca.comprameyguer.service.external.ConversionRateService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.repository.CrudRepository;
 
@@ -16,11 +14,15 @@ import java.util.Optional;
 
 @Slf4j
 public abstract class PeripheralService<T extends PeripheralEntity, R extends PeripheralInputDTO, E extends PeripheralOutputDTO> {
-    protected final CrudRepository<T,Long> repository;
 
-    protected PeripheralService(CrudRepository<T, Long> repository) {
+    protected final CrudRepository<T,Long> repository;
+    protected final ConversionRateService conversionRateService;
+
+    protected PeripheralService(CrudRepository<T, Long> repository, ConversionRateService conversionRateService) {
         this.repository = repository;
+        this.conversionRateService = conversionRateService;
     }
+
 
     protected abstract E entityToOutputDTO(T entity);
 
@@ -38,13 +40,16 @@ public abstract class PeripheralService<T extends PeripheralEntity, R extends Pe
     }
 
     public E getItemInLocalCurrency(Long id){
+        log.info(conversionRateService.getConversionRate().toString());
+
         try {
+            Double official = conversionRateService.getConversionRate().getOfficial().getSellValue();
             E entity = repository.findById(id)
                     .map(this::entityToOutputDTO)
                     .orElse(null);
             if(entity != null && entity.getImported()) {
                 entity.setCurrency(CurrencyEnum.ARS);
-                entity.setPrice(entity.getPrice() * 350);
+                entity.setPrice(entity.getPrice() * official);
             }
             return entity;
         }catch (Exception e){

@@ -14,7 +14,7 @@ public abstract class PeripheralEntity {
     private Long id;
     private String model;
     private Boolean imported;
-    private Float price;
+    private Double price;
     private Double weight;
     private Integer stock;
 }
