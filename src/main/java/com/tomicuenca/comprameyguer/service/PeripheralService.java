@@ -95,11 +95,11 @@ public abstract class PeripheralService<T extends PeripheralEntity, R extends Pe
                     return "This item is out of stock";
                 }
             }
+            return "Item does not exist";
         } catch (Exception e) {
             log.error("An error ocurred trying to sell the item: " + e);
             return "An error ocurred trying to sell the item";
         }
-        return "Item does not exist";
     }
 
     public String updateItem(Long id, R input) {
@@ -110,23 +110,25 @@ public abstract class PeripheralService<T extends PeripheralEntity, R extends Pe
                 repository.save(entity);
                 return "Item updated successfully";
             }
+            return "Item does not exist";
         } catch (Exception e) {
             log.error("An error ocurred trying to update the item: " + e);
             return "An error ocurred trying to update the item";
         }
-        return "Item does not exist";
-
     }
 
     public String deleteItem(Long id) {
         try {
-            repository.deleteById(id);
+            Optional<T> opt = repository.findById(id);
+            if (opt.isPresent()) {
+                repository.deleteById(id);
+                return "Item deleted successfully";
+            }
+            return "Item does not exist";
         } catch (Exception e) {
             log.error("An error ocurred trying to delete the item: " + e);
             return "An error ocurred trying to delete the item";
         }
-        return "Item does not exist";
-
     }
 
 }
