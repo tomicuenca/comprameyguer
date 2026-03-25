@@ -11,5 +11,5 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class MouseOutputDTO extends PeripheralOutputDTO {
     private Integer buttons;
-    private Integer DPI;
+    private Integer dpi;
 }
