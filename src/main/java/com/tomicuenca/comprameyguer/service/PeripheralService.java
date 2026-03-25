@@ -28,6 +28,8 @@ public abstract class PeripheralService<T extends PeripheralEntity, R extends Pe
 
     protected abstract T inputDTOToEntity(R input);
 
+    protected abstract T partialInputDTOToEntity(R input, T entity);
+
     public E getItem(Long id) {
         try {
             return repository.findById(id)
@@ -98,6 +100,22 @@ public abstract class PeripheralService<T extends PeripheralEntity, R extends Pe
             return "An error ocurred trying to sell the item";
         }
         return "Item does not exist";
+    }
+
+    public String updateItem(Long id, R input) {
+        try {
+            Optional<T> opt = repository.findById(id);
+            if (opt.isPresent()) {
+                T entity = this.partialInputDTOToEntity(input, opt.get());
+                repository.save(entity);
+                return "Item updated successfully";
+            }
+        } catch (Exception e) {
+            log.error("An error ocurred trying to update the item: " + e);
+            return "An error ocurred trying to update the item";
+        }
+        return "Item does not exist";
+
     }
 
     public String deleteItem(Long id) {

@@ -40,6 +40,11 @@ public class KeyboardController {
         return keyboardService.sellItem(id);
     }
 
+    @PatchMapping("/update")
+    public String updateKeyboard(@RequestParam Long id, @RequestBody KeyboardInputDTO input) {
+        return keyboardService.updateItem(id, input);
+    }
+
     @DeleteMapping()
     public String deleteKeyboard(@RequestParam Long id) {
         return keyboardService.deleteItem(id);

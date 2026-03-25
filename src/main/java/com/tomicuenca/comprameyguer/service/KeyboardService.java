@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
-public class KeyboardService extends PeripheralService<KeyboardEntity, KeyboardInputDTO, KeyboardOutputDTO>{
+public class KeyboardService extends PeripheralService<KeyboardEntity, KeyboardInputDTO, KeyboardOutputDTO> {
 
-    public KeyboardService(KeyboardRepository repository, ConversionRateService conversionRateService){
+    public KeyboardService(KeyboardRepository repository, ConversionRateService conversionRateService) {
         super(repository, conversionRateService);
     }
 
@@ -25,5 +25,10 @@ public class KeyboardService extends PeripheralService<KeyboardEntity, KeyboardI
     @Override
     protected KeyboardEntity inputDTOToEntity(KeyboardInputDTO input) {
         return KeyboardMapper.inputDTOToEntity(input);
+    }
+
+    @Override
+    protected KeyboardEntity partialInputDTOToEntity(KeyboardInputDTO input, KeyboardEntity entity) {
+        return KeyboardMapper.partialInputDTOToEntity(input, entity);
     }
 }
