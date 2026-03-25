@@ -42,8 +42,6 @@ public abstract class PeripheralService<T extends PeripheralEntity, R extends Pe
     }
 
     public E getItemInLocalCurrency(Long id) {
-        log.info(conversionRateService.getConversionRate().toString());
-
         try {
             Double official = conversionRateService.getConversionRate().getOfficial().getSellValue();
             E entity = repository.findById(id)
